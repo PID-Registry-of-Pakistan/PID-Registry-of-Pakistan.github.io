@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — PID Registry of Pakistan (PSPID)</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1e293b; background: #f4f7fa; margin: 0; line-height: 1.65; }
+    header { background: #073b66; color: #fff; padding: 32px 20px; text-align: center; }
+    header h1 { margin: 0 0 6px; font-size: 1.7rem; }
+    header p { margin: 0; color: #bbd7f0; font-size: 0.95rem; }
+    main { max-width: 860px; margin: 24px auto 48px; background: #fff; padding: 32px; border-radius: 14px; border: 1px solid #e2e8f0; }
+    h2 { color: #073b66; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-top: 28px; font-size: 1.2rem; }
+    .notice { background: #eff6ff; border-left: 4px solid #0267a6; padding: 14px 16px; border-radius: 8px; margin: 16px 0; }
+    .warn { background: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 16px; border-radius: 8px; margin: 16px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.92rem; }
+    th, td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #f8fafc; color: #073b66; }
+    a { color: #0267a6; }
+    footer { text-align: center; color: #64748b; font-size: 0.85rem; padding: 16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Privacy Policy &amp; Clinical Data Governance</h1>
+    <p>PID Registry of Pakistan — Pakistan Society for Primary Immunodeficiency Disorders (PSPID)</p>
+  </header>
+
+  <main>
+    <p><strong>Effective Date:</strong> November 24, 2026 &nbsp;|&nbsp; <strong>Policy Version:</strong> 1.0.0</p>
+
+    <div class="notice">
+      <strong>Intended Users:</strong> <em>PID Registry of Pakistan</em> is a clinical documentation, epidemiological registry, and educational decision-support application intended strictly for verified healthcare professionals (immunologists, pediatricians, hematologists, and authorized hospital staff aged 18+). It is not a consumer self-diagnosis app.
+    </div>
+
+    <h2>1. Regulatory &amp; Ethical Alignment</h2>
+    <p>PSPID operates this registry in accordance with national and international clinical governance and data protection principles:</p>
+    <ul>
+      <li><strong>Pakistan Legal &amp; Bioethical Frameworks:</strong> Prevention of Electronic Crimes Act (PECA) 2016; National Bioethics Committee (NBC) Pakistan and institutional IRB/ERC biomedical research standards; Pakistan Medical &amp; Dental Council (PMDC/PMC) medical confidentiality rules; Provincial Healthcare Commissions record standards; and proactive alignment with the draft Pakistan Personal Data Protection Bill (MoITT) principles for sensitive health data and child protections.</li>
+      <li><strong>International Clinical &amp; Privacy Standards:</strong> EU GDPR (Article 9 special-category health data, data minimization, pseudonymization), HIPAA Security Rule technical safeguards, WMA Declaration of Helsinki, CIOMS International Ethical Guidelines for Health-Related Research, and ESID/IUIS registry stewardship standards.</li>
+    </ul>
+
+    <h2>2. Data We Collect &amp; How It Is Used</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Data Elements</th>
+          <th>Purpose &amp; Custody</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Clinician Account Data</strong></td>
+          <td>Full name, official email, phone number, hospital/center affiliation, PMDC/PMC registration number, designation, specialty, and Terms acceptance timestamp.</td>
+          <td>Identity verification, role-based access control (RBAC), hospital scoping, and medicolegal audit accountability.</td>
+        </tr>
+        <tr>
+          <td><strong>Patient Clinical Registry Data (PHI)</strong></td>
+          <td>Patient demographics, district/province, consanguinity/family pedigree, clinical red flags, hematology/immunology/flow cytometry results, molecular genetic variants, follow-up visits, and documented parent/guardian informed consent.</td>
+          <td>Clinical care continuity, hospital cohort management, and strictly de-identified national epidemiological research. Patient records remain under the custody of the enrolling hospital.</td>
+        </tr>
+        <tr>
+          <td><strong>Security &amp; Audit Metadata</strong></td>
+          <td>Local SHA-256 salted PIN hash (stored on device only), login sessions, and clinical action audit timestamps.</td>
+          <td>Device PHI protection, preventing unauthorized access, and clinical non-repudiation.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Zero Advertising or Data Brokerage:</strong> We never sell, rent, or transmit clinician or patient data to advertising networks, marketing platforms, or commercial third-party analytics SDKs.</p>
+
+    <h2>3. Informed Consent &amp; Pediatric Protections</h2>
+    <p>Because Primary Immunodeficiency (Inborn Errors of Immunity) predominantly affects infants and children, participating clinicians must obtain and document informed consent from a parent or legal guardian prior to enrolling any minor into the registry, in line with NBC Pakistan, IRB/ERC, and Declaration of Helsinki standards. Parents/guardians may separately opt in or opt out of de-identified international consortium sharing (e.g., ESID/IPOPI) and biobanking.</p>
+
+    <h2>4. Data Security, Offline Storage &amp; Hospital Isolation</h2>
+    <ul>
+      <li><strong>Transport &amp; Storage Encryption:</strong> All cloud synchronization uses HTTPS/TLS encryption. Optional local backup files (<code>.pidbak</code>) are encrypted with AES-256.</li>
+      <li><strong>Strict Multi-Hospital Isolation:</strong> Database Row-Level Security (RLS) restricts clinical PHI strictly to authorized staff belonging to the enrolling hospital. Cross-hospital national analytics expose only aggregated, non-identifiable counts.</li>
+      <li><strong>Device Protection:</strong> Optional 4-digit security PIN (stored locally as a salted SHA-256 hash) and device biometrics protect local access. Signing out or deleting an account automatically wipes locally cached SQLite patient records on the device.</li>
+    </ul>
+
+    <h2>5. Clinical Decision Support Disclaimer</h2>
+    <div class="warn">
+      Automated flags inside the app (including infant lymphopenia SCID alerts, delayed umbilical cord separation alerts, live-vaccine EPI contraindication references, and IUIS classification helpers) are <strong>clinical reference and educational aids only</strong>. They do not constitute a standalone medical diagnosis and must never replace qualified clinical judgment, specialist immunology consultation, or confirmatory laboratory/genetic testing.
+    </div>
+
+    <h2>6. Data Retention, Research De-Identification &amp; Account Deletion</h2>
+    <p>Research dataset exports include a de-identification mode that removes direct personal identifiers and generates a SHA-256 integrity checksum. Clinicians may permanently delete their personal account and credentials at any time inside the app (<strong>Settings &rarr; Delete Account &amp; Personal Data</strong>) or online via our dedicated <a href="account-deletion.html">Account Deletion Request Page</a>.</p>
+    <p>When a clinician deletes their account, their authentication credentials, personal profile (name, email, phone, PMDC number), and local device cache are permanently erased. Hospital-custodied patient medical records remain preserved with the treating institution under healthcare record-retention and NBC/IRB governance, with the departed clinician's personal account unlinked and anonymized in audit trails.</p>
+
+    <h2>7. Your Rights &amp; Contact Information</h2>
+    <p>Authorized clinicians and parents/guardians of enrolled patients (through their treating hospital center) may request access, correction, withdrawal of research consent, or erasure of eligible data by contacting the PSPID Data Governance Officer:</p>
+    <p>
+      <strong>Organization:</strong> Pakistan Society for Primary Immunodeficiency Disorders (PSPID)<br />
+      <strong>Application:</strong> PID Registry of Pakistan<br />
+      <strong>Email:</strong> <a href="mailto:PSPID.support@gmail.com">PSPID.support@gmail.com</a><br />
+      <strong>Account Deletion Portal:</strong> <a href="account-deletion.html">Request Account Deletion</a>
+    </p>
+  </main>
+
+  <footer>&copy; 2026 Pakistan Society for Primary Immunodeficiency Disorders (PSPID). All rights reserved.</footer>
+</body>
+</html>
