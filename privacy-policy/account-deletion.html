@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Deletion — PID Registry of Pakistan (PSPID)</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1e293b; background: #f4f7fa; margin: 0; line-height: 1.6; }
+    header { background: #073b66; color: #fff; padding: 28px 20px; text-align: center; }
+    header h1 { margin: 0 0 6px; font-size: 1.6rem; }
+    header p { margin: 0; color: #bbd7f0; font-size: 0.92rem; }
+    main { max-width: 760px; margin: 24px auto 48px; background: #fff; padding: 28px; border-radius: 14px; border: 1px solid #e2e8f0; }
+    h2 { color: #073b66; font-size: 1.15rem; margin-top: 24px; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9rem; }
+    th, td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; }
+    th { background: #f8fafc; color: #073b66; }
+    label { display: block; font-weight: 600; font-size: 0.9rem; margin-top: 14px; }
+    input, textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; }
+    button { margin-top: 18px; width: 100%; background: #dc2626; color: #fff; border: none; padding: 13px; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .status { margin-top: 14px; padding: 12px; border-radius: 8px; display: none; font-size: 0.92rem; }
+    .ok { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .err { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Account &amp; Data Deletion</h1>
+    <p>PID Registry of Pakistan — Pakistan Society for Primary Immunodeficiency Disorders (PSPID)</p>
+  </header>
+
+  <main>
+    <p>This page allows authorized clinicians registered in <strong>PID Registry of Pakistan</strong> (developed by <strong>PSPID</strong>) to permanently delete their user account and associated personal data.</p>
+
+    <h2>Option 1: Instant In-App Deletion (Recommended)</h2>
+    <ol>
+      <li>Open <strong>PID Registry of Pakistan</strong> on your Android or Windows device.</li>
+      <li>Go to <strong>Settings &rarr; Account Card</strong> and tap <strong>Delete Account &amp; Personal Data</strong>.</li>
+      <li>Re-enter your password to verify your identity and confirm permanent deletion.</li>
+    </ol>
+
+    <h2>What Data Is Deleted vs. Retained</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Data Type</th>
+          <th>Action Upon Deletion</th>
+          <th>Retention / Legal Basis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Clinician Login Credentials, Name, Email, Phone, PMDC/PMC Number, Designation</td>
+          <td><strong>Permanently Deleted</strong> (immediately in-app, or within 7 business days via web request)</td>
+          <td>Not retained after deletion completes.</td>
+        </tr>
+        <tr>
+          <td>Local Device Cache (SQLite PHI &amp; 4-Digit PIN)</td>
+          <td><strong>Wiped Immediately</strong> upon in-app deletion or sign-out</td>
+          <td>Zero local retention.</td>
+        </tr>
+        <tr>
+          <td>Hospital-Custodied Patient Medical Records &amp; Anonymized Audit Timestamps</td>
+          <td><strong>Unlinked from Your Personal Account</strong> (personal clinician identifiers scrubbed)</td>
+          <td>Retained by the enrolling hospital under Pakistani healthcare record-keeping and NBC/IRB clinical governance requirements.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Option 2: Request Deletion Online (Without Installing the App)</h2>
+    <form id="deleteForm">
+      <label for="fullName">Full Name *</label>
+      <input id="fullName" type="text" required placeholder="e.g., Dr. Ahmed Raza" />
+
+      <label for="email">Registered Official Email *</label>
+      <input id="email" type="email" required placeholder="doctor@hospital.org.pk" />
+
+      <label for="hospital">Affiliated Hospital / Center (Optional)</label>
+      <input id="hospital" type="text" placeholder="e.g., Children's Hospital Lahore" />
+
+      <label for="reason">Reason / Additional Notes (Optional)</label>
+      <textarea id="reason" rows="3" placeholder="Optional note for PSPID Data Governance Officer"></textarea>
+
+      <button id="submitBtn" type="submit">Submit Account Deletion Request</button>
+      <div id="statusBox" class="status"></div>
+    </form>
+
+    <p style="margin-top: 22px; font-size: 0.88rem; color: #64748b;">
+      Need assistance? Email <a href="mailto:PSPID.support@gmail.com">PSPID.support@gmail.com</a> &nbsp;|&nbsp; <a href="privacy-policy.html">Read Privacy Policy</a>
+    </p>
+  </main>
+
+  <script>
+    const SUPABASE_URL = "https://febttpzwpgsgcmznudws.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_QLQjhO8G2zihbVp3sFwvnA_NmDgJYxT";
+
+    document.getElementById("deleteForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("submitBtn");
+      const statusBox = document.getElementById("statusBox");
+      btn.disabled = true;
+      btn.textContent = "Submitting Request...";
+      statusBox.style.display = "none";
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/account_deletion_requests`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_PUBLISHABLE_KEY,
+            "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({
+            full_name: document.getElementById("fullName").value.trim(),
+            email: document.getElementById("email").value.trim().toLowerCase(),
+            hospital_name: document.getElementById("hospital").value.trim() || null,
+            reason: document.getElementById("reason").value.trim() || null,
+            status: "PENDING"
+          })
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        statusBox.className = "status ok";
+        statusBox.textContent = "Your account deletion request has been logged. Our Data Governance Officer will verify your identity and complete permanent deletion within 7 business days.";
+        statusBox.style.display = "block";
+        e.target.reset();
+      } catch (err) {
+        statusBox.className = "status err";
+        statusBox.textContent = "Could not submit online right now. Please email PSPID.support@gmail.com from your registered email address with subject 'Account Deletion Request'.";
+        statusBox.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Submit Account Deletion Request";
+      }
+    });
+  </script>
+</body>
+</html>
